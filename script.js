@@ -30,6 +30,26 @@ const inputElement = (type, name, title) => {
     `;
 };
 
+const selectElement = (type, name, title, options) => {
+   let optionsToSelect = "";
+
+    for (const option of options) {
+        optionsToSelect += `
+        <option>
+            ${option}
+        </option>
+        `;
+   }
+    return `
+        <div>
+            <label>${title}</label> 
+            <${type} name="${name}">
+                ${optionsToSelect}
+            </${type}
+        </div>
+    `;
+};
+
 /*
 const formElement = "<form>" + inputElement("text", "firstName") + inputElement("file", "profilePicture") + inputElement("email", "personalEmail") + inputElement("radio", "newsLetter") + inputElement("checkbox", "terms") + "</form>";
 */
@@ -39,20 +59,31 @@ const formElement = `
         ${inputElement("text", "firstName", "Keresztneved")}
         ${inputElement("file", "profilePicture", "Profilképed")}
         ${inputElement("email", "personalEmail", "Email címed")}
-        ${inputElement("radio", "newsLetter", "Hírlevelet szeretnél kapni")}
+        ${inputElement("checkbox", "newsLetter", "Hírlevelet szeretnél kapni")}
         ${inputElement("checkbox", "terms", "Elfogadom a felhasználási feltételeket")}
+        ${selectElement("select", "where", "Hol hallottál rólunk?", ["Interneten", "Ismerőstől", "Egyéb"])}
         <button>Ok</button>
     </form>
 `;
 
 const formSubmit = (event) =>{
     event.preventDefault();
-    console.log(event.target);
-    event.target.classList.add("submitted");
+    const et = event.target;
+    console.log(et);
+    et.classList.add("submitted");
+
+    let selectValue = et.querySelector(`select[name="where"]`).value;
+    console.log(selectValue);
 };
 
 const inputUpdate = (event) =>{
-    document.getElementById("inputValue").innerHTML = event.target.value; 
+
+    if (event.target.getAttribute("name") === "firstName"){
+        document.getElementById("inputValue").innerHTML = event.target.value;                 
+    };
+   
+    console.log(event.target.closest("#form"));
+
 };
 
 function loadEvent() {
