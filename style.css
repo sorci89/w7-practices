@@ -1,141 +1,174 @@
+@charset "UTF-8";
 * {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    outline: none;
-    box-sizing: border-box;
-  
-    background: transparent;
-  
-    font-family: inherit;
-    
-    text-decoration: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: none;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  background: transparent;
+  font-family: inherit;
+  text-decoration: none;
 }
-  
+
 ol, ul, li {
-    list-style:none;
-    display:block;
+  list-style: none;
+  display: block;
 }
-  
+
 table {
-    border-collapse:collapse;
-    border-spacing:0
+  border-collapse: collapse;
+  border-spacing: 0;
 }
-  
+
 a img {
-    border: none
+  border: none;
 }
-  
+
 button, a {
-    cursor: pointer;
-    color: inherit
+  cursor: pointer;
+  color: inherit;
 }
-  
+
 textarea {
-    resize: none
+  resize: none;
 }
-  
+
 button, input, textarea, select {
-    appearance: none !important;
-    -webkit-appearance: none !important;
-    border-radius: 0
+  -moz-appearance: none !important;
+       appearance: none !important;
+  -webkit-appearance: none !important;
+  border-radius: 0;
 }
 
 body {
-    background-color: #a8dadc;
-    
-    font-family: 'Open Sans', sans-serif;
-    font-weight: bold;
+  background-color: #a8dadc;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: bold;
 }
 
 #root {
-    display: flex;
-    justify-content: center;
-
-    color: #1d3557;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  color: #1d3557;
 }
 
 form {
-    display: grid;
-    margin-top: 3em;
-    margin-bottom: 3em;
-    padding: 1%;
-
-    width: 70%;
-
-    border: 2px solid #1d3557;
-    border-radius: 5%;
-    background-color: #f1faee;
-
+  display: -ms-grid;
+  display: grid;
+  margin-top: 3em;
+  margin-bottom: 3em;
+  padding: 1%;
+  width: 40%;
+  border: 2px solid #1d3557;
+  background-color: #f1faee;
 }
 
 #form div {
-    margin-top: 1em;
-    margin-bottom: 1em;
-  
+  margin-top: 1em;
+  margin-bottom: 1em;
 }
 
 #root::before {
-    content: "Feliratkozás";
-    position: absolute;
-    top: 0.5em;
-    justify-content: center;
-
-    font-size: 25px;
-    text-transform: uppercase;
+  content: "Feliratkozás";
+  position: absolute;
+  top: 0.5em;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 40%;
+  background-color: white;
+  font-size: 25px;
+  text-transform: uppercase;
 }
 
 label {
-    display: block;
-    margin-top: 0.5%;
-    margin-bottom: 0.5%;
-
-    font-size: 15px;
+  display: block;
+  margin-top: 0.5%;
+  margin-bottom: 0.5%;
+  font-size: 15px;
 }
 
 input[type="text"] {
-
-    padding: 1%;
-    width: 100%;
-    outline: 1px solid black;
+  padding: 1%;
+  width: 100%;
+  outline: 1px solid black;
 }
 
 input[type="email"] {
-
-    padding: 1%;
-    width: 100%;
-    outline: 1px solid black;
+  padding: 1%;
+  width: 100%;
+  outline: 1px solid black;
 }
 
 input[type="checkbox"] {
-    border: 1px solid #1d3557;
-    box-shadow: 0 0 0 2px #1d3557;
-    height: 40%;
-    width: 2%;
+  border: 1px solid #1d3557;
+  -webkit-box-shadow: 0 0 0 2px #1d3557;
+          box-shadow: 0 0 0 2px #1d3557;
+  height: 40%;
+  width: 2%;
 }
 
 input:focus {
-    background-color: white;
-    border: 2px solid #1d3557;
+  background-color: white;
+  border: 2px solid #1d3557;
 }
 
 select {
-    background-color: transparent;
-    border: none;
-    padding: 0 1em 0 0;
-    margin: 0;
-    width: 50%;
+  background-color: transparent;
+  border: none;
+  padding: 0 1em 0 0;
+  margin: 0;
+  width: 50%;
 }
 
 button {
-    display: block;
-    margin: 1em;
-
-    width: 80%;
-
-    border: 1px solid #1d3557;
-    background-color: #f1faee;
-
-    font-size: 30px;
-
+  display: block;
+  margin: 1em;
+  width: 80%;
+  border: 1px solid #1d3557;
+  background-color: #f1faee;
+  font-size: 30px;
 }
+
+#form div.file {
+  position: relative;
+  height: 80px;
+  background-color: white;
+}
+
+#form div.file::after {
+  content: "Kattints vagy húzd ide a fájlodat!";
+  display: block;
+  font-weight: 300;
+  text-align: center;
+}
+
+#form div.file label {
+  display: block;
+  padding-top: 20px;
+  text-align: center;
+}
+
+#form div.file input[type="file"] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 99;
+  opacity: 0;
+  cursor: pointer;
+}
+
+#inputValue img {
+  width: 200px;
+  height: 200px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+/*# sourceMappingURL=style.css.map */
