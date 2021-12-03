@@ -130,7 +130,40 @@ const formElement = `
 `;
 */
 
-const formElement = (ffs, id)=> {
+const selectFields = {
+    type: "select",
+    name: "where",
+    label:"Hol hallottál rólunk?",
+    options: [
+        "Interneten", 
+        "Ismerőstől", 
+        "Egyéb"
+    ]
+};
+
+const processCountries = async ()=>{
+    const countryRes = await fetch("https://restcountries.com/v3.1/all");
+    const countryArr = await countryRes.json();
+
+   let countries = [];
+    for (const c of countryArr) {
+        countries.push(c.name.official)
+    };
+    return countries;
+};
+console.log(processCountries());
+
+const anotherSelectFields = async ()=> {
+    return {
+        type: "select",
+        name: "contries",
+        label:"Ország?",
+        //options: ["Spanyolország", "Olaszország"]
+        options: await processCountries()
+    };
+}
+
+const formElement = (ffs, id, sel)=> {
     let inputs = "";
 
     for (const ff of ffs) {
@@ -140,7 +173,7 @@ const formElement = (ffs, id)=> {
     return `
     <form id="${id}">
         ${inputs}
-        ${selectElement("select", "where", "Hol hallottál rólunk?", ["Interneten", "Ismerőstől", "Egyéb"])}
+        ${selectElement(sel.type, sel.name, sel.label, sel.options)}
         <button>Ok</button>
     </form>
     `;
@@ -174,10 +207,12 @@ const inputUpdate = (event) =>{
 
 };
 
-function loadEvent() {
+async function loadEvent() {
     const root = document.getElementById("root");
-    root.insertAdjacentHTML('afterbegin', formElement(formFields, "form"));
-    root.insertAdjacentHTML('afterbegin', formElement(anotherFormFields, "form2"));
+    const waitForAnotherSelectFields = await anotherSelectFields();
+
+    root.insertAdjacentHTML('afterbegin', formElement(formFields, "form", selectFields));
+    root.insertAdjacentHTML('afterbegin', formElement(anotherFormFields, "form2", waitForAnotherSelectFields));
     root.insertAdjacentHTML('afterbegin', `
     <div id="inputValue"></div>
     `);
